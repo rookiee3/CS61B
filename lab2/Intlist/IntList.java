@@ -84,12 +84,6 @@ public class IntList {
         if(A == null){
             return B;
         }
-        else if (B == null){
-            return A;
-        }
-        else if (A == null || B == null){
-            return null;
-        }
         else{
             IntList temp = A;
             while(temp.rest != null){
@@ -109,17 +103,10 @@ public class IntList {
         if(A == null){
             return B;
         }
-        else if (B == null){
-            return A;
+        if(A.rest == null){
+            return new IntList(A.first, B);
         }
-        else if (A == null || B == null){
-            return null;
-        }
-        else{
-            IntList C = new IntList(A.first, A.rest);
-            dcatenate(C,B);
-            return C;
-        }
+        return new IntList(A.first, dcatenate(A.rest, B));
     }
 
 
