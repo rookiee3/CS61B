@@ -106,8 +106,7 @@ public class IntList {
         if(A.rest == null){
             return new IntList(A.first, B);
         }
-        IntList C = new IntList(A.first, A.rest);
-        return new IntList(C.first, dcatenate(C.rest, B));
+        return new IntList(A.first, dcatenate(A.rest, B));
     }
 
 
