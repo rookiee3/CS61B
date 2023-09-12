@@ -100,18 +100,25 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        if(A == null){
+        if (A == null) {
             return B;
         }
+
         IntList ptrA = A;
-        IntList res = new IntList(0, null);
-        IntList ptrRes = res;
-        while(ptrA != null){
-            ptrRes = new IntList(ptrA.first, null);
-            ptrA = ptrA.rest;
-            ptrRes = ptrRes.rest;
+        IntList res = new IntList(0, null); // 初始化一个空的结果列表。
+        IntList ptrRes = res; // 指向结果列表的指针。
+
+        // 从 A 复制元素到结果列表。
+        while (ptrA != null) {
+            ptrRes.rest = new IntList(ptrA.first, null); // 创建一个与 ptrA 具有相同值的新节点。
+            ptrA = ptrA.rest; // 移动到 A 中的下一个节点。
+            ptrRes = ptrRes.rest; // 移动到结果列表中的下一个节点。
         }
+
+        // 将结果列表链接到 B。
         ptrRes.rest = B;
+
+        // 返回从第一个节点开始的结果列表（跳过虚拟节点）。
         return res.rest;
     }
 
