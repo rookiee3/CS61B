@@ -2,7 +2,7 @@
  * 执行一些基本的链表测试。
  */
 public class LinkedListDequeTest {
-	public static boolean checkEmpty(boolean expected, boolean actual) {
+    public static boolean checkEmpty(boolean expected, boolean actual) {
 		if (expected != actual) {
 			System.out.println("isEmpty() 返回了 " + actual + "，但预期是：" + expected);
 			return false;
