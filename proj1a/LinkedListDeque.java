@@ -19,7 +19,7 @@ public class LinkedListDeque<T> {
             this.data = data;
         }
 
-        private Node() {}
+        private Node() { }
     }
 
     public boolean isEmpty() {
@@ -32,9 +32,7 @@ public class LinkedListDeque<T> {
         if (isEmpty()) {
             head = sentinel;
             tail = sentinel;
-        }
-        // 不为空
-        else {
+        } else {
             Node<T> temp = head;
             head = sentinel;
             temp.prev = head;
