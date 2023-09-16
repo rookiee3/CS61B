@@ -1,46 +1,41 @@
-/** Performs some basic linked list tests. */
+/**
+ * 执行一些基本的链表测试。
+ */
 public class LinkedListDequeTest {
-	
-	/* Utility method for printing out empty checks. */
+
+	/* 用于打印空检查的实用方法。 */
 	public static boolean checkEmpty(boolean expected, boolean actual) {
 		if (expected != actual) {
-			System.out.println("isEmpty() returned " + actual + ", but expected: " + expected);
+			System.out.println("isEmpty() 返回了 " + actual + "，但预期是：" + expected);
 			return false;
 		}
 		return true;
 	}
 
-	/* Utility method for printing out empty checks. */
+	/* 用于打印大小检查的实用方法。 */
 	public static boolean checkSize(int expected, int actual) {
 		if (expected != actual) {
-			System.out.println("size() returned " + actual + ", but expected: " + expected);
+			System.out.println("size() 返回了 " + actual + "，但预期是：" + expected);
 			return false;
 		}
 		return true;
 	}
 
-	/* Prints a nice message based on whether a test passed. 
-	 * The \n means newline. */
+	/* 根据测试是否通过打印相应的消息。 */
 	public static void printTestStatus(boolean passed) {
 		if (passed) {
-			System.out.println("Test passed!\n");
+			System.out.println("测试通过!\n");
 		} else {
-			System.out.println("Test failed!\n");
+			System.out.println("测试失败!\n");
 		}
 	}
 
-	/** Adds a few things to the list, checking isEmpty() and size() are correct, 
-	  * finally printing the results. 
-	  *
-	  * && is the "and" operation. */
+	/** 添加一些元素到列表中，检查 isEmpty() 和 size() 是否正确，最后打印结果。 */
 	public static void addIsEmptySizeTest() {
-		System.out.println("Running add/isEmpty/Size test.");
+		System.out.println("运行添加/isEmpty/size测试。");
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 		lld1.addFirst("front");
-
-		// The && operator is the same as "and" in Python.
-		// It's a binary operator that returns true if both arguments true, and false otherwise.
 
 		passed = checkSize(1, lld1.size()) && passed;
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
@@ -51,91 +46,84 @@ public class LinkedListDequeTest {
 		lld1.addLast("back");
 		passed = checkSize(3, lld1.size()) && passed;
 
-		System.out.println("Printing out deque: ");
+		System.out.println("打印链表：");
 		lld1.printDeque();
 
 		printTestStatus(passed);
-
 	}
 
-	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
+	/** 添加一个元素，然后删除一个元素，并确保之后链表为空。 */
 	public static void addRemoveTest() {
-
-		System.out.println("Running add/remove test.");
+		System.out.println("运行添加/删除测试。");
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-
-		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
-		// should not be empty
 		lld1.addFirst(10);
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
-		// should be empty
 		lld1.removeFirst();
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
-
 	}
 
 	public static void getTest() {
-		System.out.println("Running get test.");
+		System.out.println("运行 get 测试。");
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 
-		//deque size = 0
-		if(lld1.get(0) == null){
-			System.out.println("case1 passed");
+		// 双向链表大小为0
+		if (lld1.get(0) == null) {
+			System.out.println("案例1通过");
 		}
 
-		//index bigger than actual size
+		// 索引大于实际大小
 		lld1.addFirst(1);
 		lld1.addFirst(2);
-		if(lld1.get(2) == null){
-			System.out.println("case2 passed");
+		if (lld1.get(2) == null) {
+			System.out.println("案例2通过");
 		}
 
-		//normal condition
-		if(lld1.get(0) == 2){
-			System.out.println("case3 passed");
+		// 正常情况
+		if (lld1.get(0).equals(2)) {
+			System.out.println("案例3通过");
 		}
 	}
 
 	public static void getRecursiveTest() {
-		System.out.println("Running getRecursive test.");
+		System.out.println("运行 getRecursive 测试。");
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 
-		//deque size = 0
-		if(lld1.getRecursive(0) == null){
-			System.out.println("case1 passed");
+		// 双向链表大小为0
+		if (lld1.getRecursive(0) == null) {
+			System.out.println("案例1通过");
 		}
 
-		//index bigger than actual size
+		// 索引大于实际大小
 		lld1.addFirst(1);
 		lld1.addFirst(2);
-		if(lld1.getRecursive(2) == null){
-			System.out.println("case2 passed");
+		if (lld1.getRecursive(2) == null) {
+			System.out.println("案例2通过");
 		}
 
-		//normal condition
+		// 正常情况
 		lld1.addFirst(3);
 		lld1.addFirst(4);
-		if(lld1.getRecursive(0) == 4){
-			System.out.println("case3 passed");
+		if (lld1.getRecursive(0).equals(4)) {
+			System.out.println("案例3通过");
 		}
-		if(lld1.getRecursive(1) == 3){
-			System.out.println("case4 passed");
+		if (lld1.getRecursive(1).equals(3)) {
+			System.out.println("案例4通过");
 		}
-		if(lld1.getRecursive(3) == 1){
-			System.out.println("case5 passed");
+		if (lld1.getRecursive(3).equals(1)) {
+			System.out.println("案例5通过");
 		}
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Running tests.\n");
+		System.out.println("运行测试。\n");
 		addIsEmptySizeTest();
 		addRemoveTest();
 		getTest();
 		getRecursiveTest();
 	}
-} 
+}
