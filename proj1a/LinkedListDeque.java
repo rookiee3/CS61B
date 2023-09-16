@@ -2,7 +2,7 @@ public class LinkedListDeque<T> {
 
     private Node<T> tail;
     private Node<T> head;
-    private int size ;
+    private int size;
 
     public LinkedListDeque() {
         this.head = null;
@@ -10,7 +10,7 @@ public class LinkedListDeque<T> {
         this.size = 0;
     }
 
-    public class Node<T> {
+    private class Node<T> {
         private Node<T> next;
         private Node<T> prev;
         private T data;
@@ -18,7 +18,8 @@ public class LinkedListDeque<T> {
         private Node(T data) {
             this.data = data;
         }
-        private Node(){}
+
+        private Node() {}
     }
 
     public boolean isEmpty() {
@@ -26,13 +27,13 @@ public class LinkedListDeque<T> {
     }
 
     public void addFirst(T item) {
-        Node<T> sentinel = new Node<> (item);
-        //dllist is empty
-        if(isEmpty()) {
+        Node<T> sentinel = new Node<>(item);
+        // 双向链表为空
+        if (isEmpty()) {
             head = sentinel;
             tail = sentinel;
         }
-        //not empty
+        // 不为空
         else {
             Node<T> temp = head;
             head = sentinel;
@@ -43,12 +44,11 @@ public class LinkedListDeque<T> {
     }
 
     public void addLast(T item) {
-        Node<T> sentinel = new Node<> (item);
-        if(isEmpty()) {
+        Node<T> sentinel = new Node<>(item);
+        if (isEmpty()) {
             head = sentinel;
             tail = sentinel;
-        }
-        else {
+        } else {
             Node<T> temp = tail;
             tail = sentinel;
             temp.next = tail;
@@ -63,10 +63,10 @@ public class LinkedListDeque<T> {
 
     public void printDeque() {
         Node<T> temp = head;
-        if(isEmpty()) {
-            System.out.print("empty deque!");
+        if (isEmpty()) {
+            System.out.print("空双向链表！");
         }
-        while(temp != null) {
+        while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
         }
@@ -74,17 +74,15 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
-        if(isEmpty()){
+        if (isEmpty()) {
             return null;
-        }
-        else if(size == 1) {
+        } else if (size == 1) {
             T temp = head.data;
             head = null;
             tail = null;
             size--;
             return temp;
-        }
-        else{
+        } else {
             T temp = head.data;
             head = head.next;
             head.prev = null;
@@ -94,17 +92,15 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast() {
-        if(isEmpty()){
+        if (isEmpty()) {
             return null;
-        }
-        else if(size == 1) {
+        } else if (size == 1) {
             T temp = tail.data;
             head = null;
             tail = null;
             size--;
             return temp;
-        }
-        else{
+        } else {
             T temp = tail.data;
             tail = tail.prev;
             tail.next = null;
@@ -114,13 +110,11 @@ public class LinkedListDeque<T> {
     }
 
     public T get(int index) {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
-        }
-        else if(index >= size() || index < 0) {
+        } else if (index >= size() || index < 0) {
             return null;
-        }
-        else {
+        } else {
             Node<T> temp = head;
             int flag = 0;
             while (flag != index) {
@@ -136,16 +130,13 @@ public class LinkedListDeque<T> {
     }
 
     private T getRecursiveHelper(Node<T> current, int index) {
-        if(isEmpty()){
+        if (isEmpty()) {
             return null;
-        }
-        else if(index < 0 || index >= size()) {
+        } else if (index < 0 || index >= size()) {
             return null;
-        }
-        else if(index == 0) {
+        } else if (index == 0) {
             return current.data;
         }
         return getRecursiveHelper(current.next, index - 1);
     }
-
 }
