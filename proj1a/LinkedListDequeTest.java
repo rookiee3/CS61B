@@ -35,16 +35,13 @@ public class LinkedListDequeTest {
 	  * && is the "and" operation. */
 	public static void addIsEmptySizeTest() {
 		System.out.println("Running add/isEmpty/Size test.");
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
-
 		boolean passed = checkEmpty(true, lld1.isEmpty());
-
 		lld1.addFirst("front");
-		
+
 		// The && operator is the same as "and" in Python.
 		// It's a binary operator that returns true if both arguments true, and false otherwise.
+
 		passed = checkSize(1, lld1.size()) && passed;
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
@@ -58,35 +55,87 @@ public class LinkedListDequeTest {
 		lld1.printDeque();
 
 		printTestStatus(passed);
-		*/
+
 	}
 
 	/** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
 	public static void addRemoveTest() {
 
 		System.out.println("Running add/remove test.");
-
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-		/*
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+
 		// should be empty 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
+		// should not be empty
 		lld1.addFirst(10);
-		// should not be empty 
 		passed = checkEmpty(false, lld1.isEmpty()) && passed;
 
+		// should be empty
 		lld1.removeFirst();
-		// should be empty 
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
 
 		printTestStatus(passed);
-		*/
+
+	}
+
+	public static void getTest() {
+		System.out.println("Running get test.");
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+
+		//deque size = 0
+		if(lld1.get(0) == null){
+			System.out.println("case1 passed");
+		}
+
+		//index bigger than actual size
+		lld1.addFirst(1);
+		lld1.addFirst(2);
+		if(lld1.get(2) == null){
+			System.out.println("case2 passed");
+		}
+
+		//normal condition
+		if(lld1.get(0) == 2){
+			System.out.println("case3 passed");
+		}
+	}
+
+	public static void getRecursiveTest() {
+		System.out.println("Running getRecursive test.");
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+
+		//deque size = 0
+		if(lld1.getRecursive(0) == null){
+			System.out.println("case1 passed");
+		}
+
+		//index bigger than actual size
+		lld1.addFirst(1);
+		lld1.addFirst(2);
+		if(lld1.getRecursive(2) == null){
+			System.out.println("case2 passed");
+		}
+
+		//normal condition
+		lld1.addFirst(3);
+		lld1.addFirst(4);
+		if(lld1.getRecursive(0) == 4){
+			System.out.println("case3 passed");
+		}
+		if(lld1.getRecursive(1) == 3){
+			System.out.println("case4 passed");
+		}
+		if(lld1.getRecursive(3) == 1){
+			System.out.println("case5 passed");
+		}
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
 		addRemoveTest();
+		getTest();
+		getRecursiveTest();
 	}
 } 
