@@ -84,10 +84,11 @@ public class LinkedListDeque<T>{
             return null;
         }
         else{
+            Node<T> temp = head;
             head = head.next;
             head.prev = null;
             size--;
-            return head.data;
+            return temp.data;
         }
     }
 
@@ -102,10 +103,11 @@ public class LinkedListDeque<T>{
             return null;
         }
         else{
+            Node<T> temp = tail;
             tail = tail.prev;
             tail.next = null;
             size--;
-            return tail.data;
+            return temp.data;
         }
     }
 
