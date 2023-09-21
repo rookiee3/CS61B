@@ -45,7 +45,7 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testOverloadedisPalindrome_OffByOne() {
+    public void testOverloadedisPalindromeofob1() {
 
         OffByOne obo = new OffByOne();
         assertTrue(palindrome.isPalindrome("flake", obo));

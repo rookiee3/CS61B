@@ -43,13 +43,13 @@ public class Palindrome {
             return true;
         } else if (swi % 2 == 0) { //偶数个字符
             while (!d.isEmpty()) {
-                if (!cc.equalChars((char)d.removeFirst(), (char)d.removeLast())) {
+                if (!cc.equalChars((char) d.removeFirst(), (char) d.removeLast())) {
                     return false;
                 }
             }
         } else { //奇数个字符
             while (d.size() != 1) {
-                if (!cc.equalChars((char)d.removeFirst(), (char)d.removeLast())) {
+                if (!cc.equalChars((char) d.removeFirst(), (char) d.removeLast())) {
                     return false;
                 }
             }

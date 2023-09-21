@@ -1,4 +1,4 @@
-public class ArrayDeque<T> implements Deque <T>{
+public class ArrayDeque<T> implements Deque<T> {
 
     /** array to save data.*/
     private T[] array;

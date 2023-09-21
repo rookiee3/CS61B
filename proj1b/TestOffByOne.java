@@ -21,5 +21,8 @@ public class TestOffByOne {
 
         assertFalse(offByOne.equalChars(' ', '0'));
         System.out.println("case4 passed");
+
+        assertFalse(offByOne.equalChars('a', 'A'));
+        System.out.println("case5 passed");
     }
 }
