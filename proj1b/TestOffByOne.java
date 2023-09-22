@@ -30,12 +30,14 @@ public class TestOffByOne {
 
         assertFalse(offByOne.equalChars('a', 'z'));
         System.out.println("case7 passed");
-        /*assertTrue(offByOne.equalChars('a', 'b'));
+
         assertTrue(offByOne.equalChars('r', 'q'));
-        assertTrue(offByOne.equalChars('&', '%'));
-        assertFalse(offByOne.equalChars('a', 'a'));
+        System.out.println("case8 passed");
+
         assertFalse(offByOne.equalChars('a', 'z'));
+        System.out.println("case9 passed");
+
         assertFalse(offByOne.equalChars('a', 'e'));
-        assertFalse(offByOne.equalChars('a', 'A'));*/
+        System.out.println("case10 passed");
     }
 }
