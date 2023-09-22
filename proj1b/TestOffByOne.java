@@ -10,7 +10,7 @@ public class TestOffByOne {
     // Your tests go here.
     @Test
     public void testequalChars() {
-        assertTrue(offByOne.equalChars('a', 'b'));
+        /*assertTrue(offByOne.equalChars('a', 'b'));
         System.out.println("case1 passed");
 
         assertFalse(offByOne.equalChars('a', 'c'));
@@ -38,6 +38,13 @@ public class TestOffByOne {
         System.out.println("case9 passed");
 
         assertFalse(offByOne.equalChars('a', 'e'));
-        System.out.println("case10 passed");
+        System.out.println("case10 passed");*/
+        assertTrue(offByOne.equalChars('a', 'b'));
+        assertTrue(offByOne.equalChars('r', 'q'));
+        assertTrue(offByOne.equalChars('&', '%'));
+        assertFalse(offByOne.equalChars('a', 'a'));
+        assertFalse(offByOne.equalChars('a', 'z'));
+        assertFalse(offByOne.equalChars('a', 'e'));
+        assertFalse(offByOne.equalChars('a', 'A'));
     }
 }
