@@ -248,7 +248,7 @@ public class Game {
     }
 
     private TETile[][] getSavedGame() {
-        TETile[][] finalWorldFrame = null;
+        TETile[][] finalWorldFrame =  new TETile[WIDTH][HEIGHT];
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("savefile.txt"));
             finalWorldFrame = (TETile[][]) in.readObject();
