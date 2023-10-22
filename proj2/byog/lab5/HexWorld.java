@@ -12,8 +12,8 @@ import java.util.Random;
  * Draws a world consisting of hexagonal regions.
  */
 public class HexWorld {
-    public static final int width = 80;
-    public static final int length = 60;
+    public static final int width = 50;
+    public static final int length = 50;
 
     public static void drawOneLine (TERenderer ter, TETile[][] world, int size, int xPos, int yPos, int type) {
         switch (type) {
