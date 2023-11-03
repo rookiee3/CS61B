@@ -7,11 +7,11 @@ public class Percolation {
     private int topSite;
     private int bottomSite;
     private int openNum = 0;
-    private boolean openFlag[][];
+    private boolean[][] openFlag;
     private WeightedQuickUnionUF sites1;
     private WeightedQuickUnionUF sites2;
 
-    private int xyTo1D (int row, int col) {
+    private int xyTo1D(int row, int col) {
         return row * N + col;
     }
     private void valid(int row, int col) {
@@ -19,11 +19,11 @@ public class Percolation {
             throw new IndexOutOfBoundsException();
         }
     }
-    private void unionNeighbor (int row, int col, int newRow, int newCol) {
+    private void unionNeighbor(int row, int col, int newRow, int newCol) {
         if (newRow < 0 || newRow >= N || newCol < 0 || newCol >= N) {
             return;
         }
-        if (openFlag[newRow][newCol]){
+        if (openFlag[newRow][newCol]) {
             sites1.union(xyTo1D(row, col), xyTo1D(newRow, newCol));
             sites2.union(xyTo1D(row, col), xyTo1D(newRow, newCol));
         }
