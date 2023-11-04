@@ -87,12 +87,12 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
             remove(key);
             return;
         }
+        if (loadFactor() > MAX_LF) {
+            resize(2 * size);
+        }
         int index = hash(key);
         if (!buckets[index].containsKey(key)) {
             size++;
-        }
-        if (loadFactor() > MAX_LF) {
-            resize(2 * DEFAULT_SIZE);
         }
         buckets[index].put(key, value);
     }
