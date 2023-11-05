@@ -21,7 +21,7 @@ public class SimpleOomage implements Oomage {
         } else if (this.getClass() != o.getClass()) {
             return false;
         }
-        SimpleOomage other = (SimpleOomage)o;
+        SimpleOomage other = (SimpleOomage) o;
         return other.blue == this.blue && other.green == this.green && other.red == this.red;
     }
 
@@ -33,7 +33,7 @@ public class SimpleOomage implements Oomage {
         if (!USE_PERFECT_HASH) {
             return red + green + blue;
         } else {
-            return (red/5 << 16) + (green/5 << 8) + blue/5;
+            return (red / 5 << 16) + (green / 5 << 8) + blue / 5;
         }
     }
 
