@@ -1,12 +1,16 @@
 package hw4.puzzle;
 
 import edu.princeton.cs.algs4.MinPQ;
-
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
 public class Solver {
     private List<WorldState> solution = new ArrayList<>();
+    private Map<WorldState, Integer> edtgCaches = new HashMap<>();
 
     private class SearchNode {
         private WorldState worldState;
@@ -22,10 +26,19 @@ public class Solver {
 
     private class NodeComparator implements Comparator<SearchNode> {
         @Override
-        public int compare(SearchNode n1, SearchNode n2) {
-            int c1 = n1.moves + n1.worldState.estimatedDistanceToGoal();
-            int c2 = n2.moves + n2.worldState.estimatedDistanceToGoal();
-            return c1 - c2;
+        public int compare(SearchNode o1, SearchNode o2) {
+            int o1Edtg = getEdtg(o1);
+            int o2Edtg = getEdtg(o2);
+            int o1Priority = o1.moves + o1Edtg;
+            int o2Priority = o2.moves + o2Edtg;
+            return o1Priority - o2Priority;
+        }
+
+        private int getEdtg(SearchNode sn) {
+            if (!edtgCaches.containsKey(sn.worldState)) {
+                edtgCaches.put(sn.worldState, sn.worldState.estimatedDistanceToGoal());
+            }
+            return edtgCaches.get(sn.worldState);
         }
     }
     public Solver(WorldState initial) {
@@ -46,7 +59,7 @@ public class Solver {
             }
         }
         Stack<WorldState> path = new Stack<>();
-        for (SearchNode n = curr;  n != null ; n = n.prev) {
+        for (SearchNode n = curr;  n != null; n = n.prev) {
             path.push(n.worldState);
         }
         while (!path.isEmpty()) {
