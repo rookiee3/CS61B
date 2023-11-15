@@ -2,7 +2,7 @@ package hw4.puzzle;
 
 import edu.princeton.cs.algs4.Queue;
 
-public class Board implements WorldState{
+public class Board implements WorldState {
     //grid size
     private int N;
     private final int BLANK = 0;
@@ -64,17 +64,17 @@ public class Board implements WorldState{
         return neighbors;
     }
 
-    private int xyTo1D (int x, int y) {
+    private int xyTo1D(int x, int y) {
         return x * N + y + 1;
     }
     public int hamming() {
         int res = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (tileAt(i, j) == BLANK) {
+                if (tiles[i][j] == BLANK) {
                     continue;
                 }
-                if (tileAt(i, j) != xyTo1D(i, j)) {
+                if (tiles[i][j] != xyTo1D(i, j)) {
                     res++;
                 }
             }
@@ -83,7 +83,7 @@ public class Board implements WorldState{
     }
 
     private int[] intToXY(int s) {
-        return new int[] {(s - 1) / N, (s - 1) % N};
+        return new int[] { (s - 1) / N, (s - 1) % N };
     }
     private int getXYdiff(int s, int row, int column)  {
         int res = 0;
@@ -96,11 +96,11 @@ public class Board implements WorldState{
         int res = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (tileAt(i, j) == BLANK) {
+                if (tiles[i][j] == BLANK) {
                     continue;
                 }
-                if (tileAt(i, j) != xyTo1D(i, j)) {
-                    res += getXYdiff(tileAt(i, j), i, j);
+                if (tiles[i][j] != xyTo1D(i, j)) {
+                    res += getXYdiff(tiles[i][j], i, j);
                 }
             }
         }
@@ -130,6 +130,10 @@ public class Board implements WorldState{
             }
         }
         return true;
+    }
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     /** Returns the string representation of the board. 
