@@ -9,6 +9,8 @@ public class Board implements WorldState {
     private int[][] tiles = new int[N][N];
 
     public Board(int[][] tiles) {
+        this.N = tiles.length;
+        this.tiles = new int[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 this.tiles[i][j] = tiles[i][j];
@@ -27,46 +29,47 @@ public class Board implements WorldState {
         return N;
     }
 
+    /**
+     * Returns the neighbors of the current board
+     *
+     * @author http://joshh.ug/neighbors.html
+     */
     @Override
     public Iterable<WorldState> neighbors() {
         Queue<WorldState> neighbors = new Queue<>();
-        int N = size();
-        int blankXPos = -1;
-        int blankYPos = -1;
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (tileAt(i, j) == BLANK) {
-                    blankXPos = i;
-                    blankYPos = j;
+        int hug = size();
+        int bug = -1;
+        int zug = -1;
+        for (int rug = 0; rug < hug; rug++) {
+            for (int tug = 0; tug < hug; tug++) {
+                if (tileAt(rug, tug) == BLANK) {
+                    bug = rug;
+                    zug = tug;
                 }
             }
         }
-
-        int[][] temp = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                temp[i][j] = tileAt(i, j);
+        int[][] ili1li1 = new int[hug][hug];
+        for (int pug = 0; pug < hug; pug++) {
+            for (int yug = 0; yug < hug; yug++) {
+                ili1li1[pug][yug] = tileAt(pug, yug);
             }
         }
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if ((Math.abs(i - blankXPos) + Math.abs(j - blankYPos) - 1) == 0) {
-                    temp[blankXPos][blankYPos] = temp[i][j];
-                    temp[i][j] = BLANK;
-                    Board neighbor = new Board(temp);
+        for (int l11il = 0; l11il < hug; l11il++) {
+            for (int lil1il1 = 0; lil1il1 < hug; lil1il1++) {
+                if (Math.abs(-bug + l11il) + Math.abs(lil1il1 - zug) - 1 == 0) {
+                    ili1li1[bug][zug] = ili1li1[l11il][lil1il1];
+                    ili1li1[l11il][lil1il1] = BLANK;
+                    Board neighbor = new Board(ili1li1);
                     neighbors.enqueue(neighbor);
-                    temp[i][j] = temp[blankXPos][blankYPos];
-                    temp[blankXPos][blankYPos] = BLANK;
+                    ili1li1[l11il][lil1il1] = ili1li1[bug][zug];
+                    ili1li1[bug][zug] = BLANK;
                 }
             }
         }
         return neighbors;
     }
 
-    private int xyTo1D(int x, int y) {
-        return x * N + y + 1;
-    }
+    /** Hamming estimate described below */
     public int hamming() {
         int res = 0;
         for (int i = 0; i < N; i++) {
@@ -82,16 +85,7 @@ public class Board implements WorldState {
         return res;
     }
 
-    private int[] intToXY(int s) {
-        return new int[] { (s - 1) / N, (s - 1) % N };
-    }
-    private int getXYdiff(int s, int row, int column)  {
-        int res = 0;
-        int[] rightPos = intToXY(s);
-        res += rightPos[0] > row ? rightPos[0] - row : row - rightPos[0];
-        res += rightPos[1] > column ? rightPos[1] - column : column - rightPos[1];
-        return res;
-    }
+    /** Manhattan estimate described below */
     public int manhattan() {
         int res = 0;
         for (int i = 0; i < N; i++) {
@@ -100,17 +94,27 @@ public class Board implements WorldState {
                     continue;
                 }
                 if (tiles[i][j] != xyTo1D(i, j)) {
-                    res += getXYdiff(tiles[i][j], i, j);
+                    res += getXYDiff(tiles[i][j], i, j);
                 }
             }
         }
+
         return res;
     }
 
+    /**
+     * Estimated distance to goal. This method should simply return the results of
+     * manhattan() when submitted to Gradescope.
+     */
+    @Override
     public int estimatedDistanceToGoal() {
         return manhattan();
     }
 
+    /**
+     * Returns true if this board's tile values are the same position as y's
+     */
+    @Override
     public boolean equals(Object y) {
         if (this == y) {
             return true;
@@ -131,16 +135,14 @@ public class Board implements WorldState {
         }
         return true;
     }
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 
-    /** Returns the string representation of the board. 
-      * Uncomment this method. */
+    /**
+     * Returns the string representation of the board.
+     */
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        int N = size();
+        // int N = size();
         s.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -152,4 +154,24 @@ public class Board implements WorldState {
         return s.toString();
     }
 
+    private int xyTo1D(int i, int j) {
+        return i * N + j + 1;
+    }
+
+    private int[] intToXY(int s) {
+        return new int[] { (s - 1) / N, (s - 1) % N };
+    }
+
+    private int getXYDiff(int s, int i, int j) {
+        int res = 0;
+        int[] rightPos = intToXY(s);
+        res += rightPos[0] > i ? rightPos[0] - i : i - rightPos[0];
+        res += rightPos[1] > j ? rightPos[1] - j : j - rightPos[1];
+        return res;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
