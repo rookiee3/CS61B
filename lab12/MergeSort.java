@@ -1,8 +1,6 @@
 import edu.princeton.cs.algs4.Queue;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import static org.junit.Assert.*;
 
 public class MergeSort {
@@ -87,24 +85,22 @@ public class MergeSort {
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        if (items.isEmpty()) {
-            return null;
-        }
-        if (items.size() == 1) {
+        if (items.size() <= 1) {
             return items;
         }
 
-        Queue<Queue<Item>> temp = makeSingleItemQueues(items);
-        Queue<Item> que = mergeSortedQueues(temp.dequeue(), temp.dequeue());
-
-        while (!temp.isEmpty()) {
-            que = mergeSortedQueues(que, temp.dequeue());
+        Queue<Queue<Item>> resultQueue = makeSingleItemQueues(items);
+        while (resultQueue.size() != 1) {
+            Queue<Queue<Item>> tempQueue = new Queue<>();
+            while (!resultQueue.isEmpty()) {
+                Queue<Item> q1 = resultQueue.dequeue();
+                Queue<Item> q2 = resultQueue.isEmpty() ? new Queue<>() : resultQueue.dequeue();
+                tempQueue.enqueue(mergeSortedQueues(q1, q2));
+            }
+            resultQueue = tempQueue;
         }
-        for (int i = 0; i < items.size(); i++) {
-            items.dequeue();
-            items.enqueue(que.dequeue());
-        }
-        return items;
+        return resultQueue.dequeue();
+        //return items;
     }
 
     public static void main(String args[]) {
@@ -112,10 +108,11 @@ public class MergeSort {
         students.enqueue("Alice");
         students.enqueue("Vanessa");
         students.enqueue("Ethan");
-        mergeSort(students);
-        while (!students.isEmpty()) {
-            System.out.println(students.dequeue());
-        }
+        Queue<String> a = new Queue<>();
+        a = mergeSort(students);
+        System.out.println(a.dequeue());
+        System.out.println(a.dequeue());
+        System.out.println(a.dequeue());
     }
 
     @Test
