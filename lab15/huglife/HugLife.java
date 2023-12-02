@@ -139,7 +139,7 @@ public class HugLife {
             System.out.println("Usage: java huglife.HugLife [worldname]");
             return;
         }
-        HugLife h = readWorld(args[0]);
+        HugLife h = readWorld("samplesolo");
         // HugLife h = new HugLife(WORLD_SIZE);
         // h.initialize(args[0]); DON'T USE ME
 
