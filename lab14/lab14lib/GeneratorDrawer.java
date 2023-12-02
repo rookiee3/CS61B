@@ -1,4 +1,5 @@
 package lab14lib;
+import lab14.SawToothGenerator;
 import lab14.SineWaveGenerator;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.QuickChart;
