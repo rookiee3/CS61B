@@ -15,7 +15,7 @@ public class SeamCarver {
 
     // current picture
     public Picture picture() {
-        return picture;
+        return new Picture(picture);
     }
 
     // width of current picture
@@ -83,8 +83,8 @@ public class SeamCarver {
 
         for (int j = 1; j < height; j++) {
             for (int k = 0; k < width; k++) {
-                double e = isVertical ? energy(j, k) : energy(k, j);
-                cost[j][k] = e + getMinCost(j, k, path, cost);
+                double e = isVertical ? energy(k, j) : energy(j, k);
+                cost[k][j] = e + getMinCost(k, j, path, cost);
             }
         }
 
