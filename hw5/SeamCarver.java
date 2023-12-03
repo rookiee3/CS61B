@@ -20,12 +20,12 @@ public class SeamCarver {
 
     // width of current picture
     public int width() {
-        return this.width;
+        return width;
     }
 
     // height of current picture
     public int height() {
-        return this.height;
+        return height;
     }
 
     // energy of pixel at column x and row y
@@ -82,9 +82,9 @@ public class SeamCarver {
         }
 
         for (int j = 1; j < height; j++) {
-            for (int k = 0; k < width; k++) {
-                double e = isVertical ? energy(k, j) : energy(j, k);
-                cost[k][j] = e + getMinCost(k, j, path, cost);
+            for (int i = 0; i < width; i++) {
+                double e = isVertical ? energy(i, j) : energy(j, i);
+                cost[i][j] = e + getMinCost(i, j, path, cost);
             }
         }
 
@@ -107,7 +107,6 @@ public class SeamCarver {
     private double getMinCost(int i, int j, int[][] path, double[][] cost) {
         double[] v =new double[3];
         double res = Double.MAX_VALUE;
-        double min = Double.MAX_VALUE;
         int pos = 0;
 
         v[1] = cost[i][j - 1];
@@ -123,7 +122,7 @@ public class SeamCarver {
         }
 
         for (int k = 0; k < 3; k++) {
-            if (v[k] < min) {
+            if (v[k] < res) {
                 res = v[k];
                 pos = k;
             }
