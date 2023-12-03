@@ -106,11 +106,11 @@ public class SeamCarver {
     }
     private double getMinCost(int i, int j, int[][] path, double[][] cost) {
         double[] v =new double[3];
-        double res = 0;
-        int pos = 0;
-        v[1] = cost[i][j - 1];
-
+        double res = Double.MAX_VALUE;
         double min = Double.MAX_VALUE;
+        int pos = 0;
+
+        v[1] = cost[i][j - 1];
         if (i > 0) {
             v[0] = cost[i - 1][j - 1];
         } else {
