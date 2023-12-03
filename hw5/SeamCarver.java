@@ -60,12 +60,12 @@ public class SeamCarver {
     }
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
-         isVertical = false;
-         swap();
-         int[] res = findVerticalSeam();
-         swap();
-         isVertical = true;
-         return res;
+        isVertical = false;
+        swap();
+        int[] res = findVerticalSeam();
+        swap();
+        isVertical = true;
+        return res;
     }
 
 
@@ -105,7 +105,7 @@ public class SeamCarver {
         return res;
     }
     private double getMinCost(int i, int j, int[][] path, double[][] cost) {
-        double[] v =new double[3];
+        double[] v = new double[3];
         double res = Double.MAX_VALUE;
         int pos = 0;
 
